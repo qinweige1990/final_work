@@ -39,7 +39,8 @@ if __name__ == "__main__":
     # 从pinterest获取图片并保存
     number = args.num if args.num is not None else 2
     for word in words[:number]:
-        # pinterest.get_image(word)
+        pinterest.get_image(word)
+        word.replace(" ", "-")
         for photo in os.listdir(os.path.join(os.path.dirname(__file__), f'photos/{word}')):
             if not photo.endswith('jpg'):
                 continue
