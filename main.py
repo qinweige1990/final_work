@@ -46,9 +46,12 @@ if __name__ == "__main__":
                 continue
             if os.name == "nt":
                 resized_photo = process_image.ps.change_size(word, photo, 3840,2160)
-                process_image.ps.replace_and_save_psd(resized_photo, os.path.join(this_root, 'files/template.psd'), word)
             else:
                 resized_photo = process_image.mock.change_size(word, photo, 3840,2160)
-                process_image.mock.replace_and_save_psd(resized_photo, os.path.join(this_root, 'files/template.psd'), word)
-
+        resized_photo_path = os.path.join(os.path.dirname(__file__), f'process_image/resized_photos/{word}')
+        for photo in os.listdir(resized_photo_path):
+            if os.name == "nt":
+                process_image.ps.replace_and_save_psd(os.path.join(resized_photo_path, photo), os.path.join(this_root, 'files/template.psd'), word)
+            else:
+                process_image.mock.replace_and_save_psd(os.path.join(resized_photo_path, photo), os.path.join(this_root, 'files/template.psd'), word)
     logging.info("处理完成")

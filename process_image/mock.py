@@ -18,7 +18,7 @@ def replace_and_save_psd(photo, psd_file, name):
     psd_path = os.path.join(os.path.dirname(__file__), f"files/{psd_file}")
     all_in_one_photo = os.path.join(os.path.dirname(__file__), f"final_photos/{name}.png")
     split_photos_dir = os.path.join(os.path.dirname(__file__), f"final_photos/{name}")
-    print(photo, psd_file)
+    print(f'photo path: {photo}')
     os.makedirs(split_photos_dir, exist_ok=True)
 
 
