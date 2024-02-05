@@ -45,7 +45,7 @@ if __name__ == "__main__":
             if not photo.endswith('jpg'):
                 continue
             if os.name == "nt":
-                resized_photo = process_image.ps.change_size(photo, 3840,2160)
+                resized_photo = process_image.ps.change_size(word, photo, 3840,2160)
                 process_image.ps.replace_and_save_psd(resized_photo, os.path.join(this_root, 'files/template.psd'), word)
             else:
                 resized_photo = process_image.mock.change_size(photo, 3840,2160)
