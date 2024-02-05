@@ -14,15 +14,15 @@ def get_psd_files():
     return files
 
 
-def change_size(name, width, height):
+def change_size(dir, photo_name, width, height):
     this_root = os.path.dirname(__file__)
-    photo_dir = os.path.join(this_root, "photos")
-    photo_path = os.path.join(photo_dir, name)
+    photo_dir = os.path.join(this_root, f"photos/{dir}")
+    photo_path = os.path.join(photo_dir, photo_name)
     with Session(photo_path, action="open") as ps:
-        resized_photo_path = os.path.join(this_root, "resized_photo")
+        resized_photo_path = os.path.join(this_root, "resized_photo/{dir}")
         os.makedirs(resized_photo_path)
-        output_path = os.path.join(resized_photo_path, f"{name}.jpg")
-        print(f"图片存储在{output_path}")
+        print(f"图片存储在{resized_photo_path}")
+        output_path = os.path.join(resized_photo_path, photo_name)
         # resize image
         if os.name == "nt":
             orig_name = ps.active_document.name

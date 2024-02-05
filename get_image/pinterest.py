@@ -32,7 +32,7 @@ def get_image(name: str):
     sortedPins = sorted(pins, key=lambda x: x['pinner_follower_count'], reverse=True)
     print(f"拉取到{len(sortedPins)}张图片，选取评论数最高的图片并保存")
     print("----------------------------------")
-    folder = "photos/"+name.replace(" ", "-")
+    folder = "process_image/photos/"+name.replace(" ", "-")
     os.makedirs(folder, exist_ok=True)
     number = 0
     for item in sortedPins:

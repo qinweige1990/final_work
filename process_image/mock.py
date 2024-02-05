@@ -7,6 +7,8 @@ def change_size(name, width, height):
     this_root = os.path.dirname(__file__)
     photo_dir = os.path.join(this_root, "photos")
     photo_path = os.path.join(photo_dir, name)
+    print(photo_path, photo_dir)
+    print(os.listdir(photo_dir))
     resized_photo_path = os.path.join(this_root, "resized_photos")
     os.makedirs(resized_photo_path, exist_ok=True)
     output_path = os.path.join(resized_photo_path, f"{name}.jpg")
