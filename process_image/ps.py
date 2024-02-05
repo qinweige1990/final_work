@@ -19,7 +19,7 @@ def change_size(dir, photo_name, width, height):
     photo_dir = os.path.join(this_root, f"photos/{dir}")
     photo_path = os.path.join(photo_dir, photo_name)
     with Session(photo_path, action="open") as ps:
-        resized_photo_path = os.path.join(this_root, "resized_photo/{dir}")
+        resized_photo_path = os.path.join(this_root, f"resized_photo/{dir}")
         os.makedirs(resized_photo_path, exist_ok=True)
         output_path = os.path.join(resized_photo_path, photo_name)
         # resize image
