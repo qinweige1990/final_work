@@ -1,8 +1,15 @@
+import os.path
+
 import get_words.get_word
 import argparse
 import logging
 import pinterest_crawler_im
 from get_image import pinterest
+import get_words.google_trend
+import process_image.mock
+if os.name == "nt":
+    import process_image.ps
+
 
 def logger():
     logging.basicConfig(level=logging.INFO)
@@ -14,6 +21,8 @@ def logger():
 
 if __name__ == "__main__":
     logger = logger()
+    this_root = os.path.dirname(__file__)
+
     # --word 支持输入关键词,如果没有输入，会从飞鱼读取
     parser = argparse.ArgumentParser()
     parser.add_argument("--word", type=str)
@@ -23,20 +32,22 @@ if __name__ == "__main__":
         words = str.split(args.word, ",")
         logging.info(f'输入的热词是：{words}')
     else:
-        words = get_words.get_word.get_hot_words()
-        logging.info(f"拉取到飞鱼的数据，排名前{args.num}的数据是", words[:args.num])
+        # words = get_words.get_word.get_hot_words()
+        words = get_words.google_trend.get_google_trend()
+        logging.info(f"拉取数据，排名前{args.num}的数据是", words[:args.num])
 
     # 从pinterest获取图片并保存
-    for word in words:
-        pinterest.get_image(word)
-
-    # pinterest_crawler_im.get_image(word)
-
-    # 调用photoshop来resize所有的图片并保存
-
-
-    # 调用photoshop的replace来替换模版中的图片并保存
-
-
+    number = args.num if args.num is not None else 2
+    for word in words[:number]:
+        # pinterest.get_image(word)
+        for photo in os.listdir(os.path.join(os.path.dirname(__file__), f'photos/{word}')):
+            if not photo.endswith('jpg'):
+                continue
+            if os.name == "nt":
+                resized_photo = process_image.ps.change_size(photo, 3840,2160)
+                process_image.ps.replace_and_save_psd(resized_photo, os.path.join(this_root, 'files/template.psd'), word)
+            else:
+                resized_photo = process_image.mock.change_size(photo, 3840,2160)
+                process_image.mock.replace_and_save_psd(resized_photo, os.path.join(this_root, 'files/template.psd'), word)
 
     logging.info("处理完成")
