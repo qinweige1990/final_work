@@ -60,6 +60,6 @@ def replace_and_save_psd(photo, psd_file, name):
     for layer in psd:
         print(layer)
         layer_image = layer.composite()
-        layer_image.save(f'{split_photos_dir}/{layer.name}.png')
+        layer_image.save(f'{split_photos_dir}/{layerdd.name}.png')
 
 

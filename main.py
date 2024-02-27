@@ -27,6 +27,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--word", type=str)
     parser.add_argument("--num", default=10, type=int)
+    parser.add_argument("--skip", default=False, type=bool)
     args = parser.parse_args()
     if args.word != None:
         words = str.split(args.word, ",")
@@ -39,19 +40,14 @@ if __name__ == "__main__":
     # 从pinterest获取图片并保存
     number = args.num if args.num is not None else 2
     for word in words[:number]:
-        pinterest.get_image(word)
+        if not args.skip:
+            pinterest.get_image(word)
         word = word.replace(" ", "-")
         for photo in os.listdir(os.path.join(os.path.dirname(__file__), f'process_image/photos/{word}')):
             if not photo.endswith('jpg'):
                 continue
-            if os.name == "nt":
-                resized_photo = process_image.ps.change_size(word, photo, 3840,2160)
-            else:
-                resized_photo = process_image.mock.change_size(word, photo, 3840,2160)
+            resized_photo = process_image.ps.change_size(word, photo, 3840,2160)
         resized_photo_path = os.path.join(os.path.dirname(__file__), f'process_image/resized_photos/{word}')
         for photo in os.listdir(resized_photo_path):
-            if os.name == "nt":
-                process_image.ps.replace_and_save_psd(os.path.join(resized_photo_path, photo), os.path.join(this_root, 'files/template.psd'), word)
-            else:
-                process_image.mock.replace_and_save_psd(os.path.join(resized_photo_path, photo), os.path.join(this_root, 'files/template.psd'), word)
+            process_image.ps.replace_and_save_psd(os.path.join(resized_photo_path, photo), os.path.join(this_root, 'files/template.psd'), word)
     logging.info("处理完成")
