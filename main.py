@@ -44,7 +44,7 @@ if __name__ == "__main__":
             pinterest.get_image(word)
         word = word.replace(" ", "-")
         for photo in os.listdir(os.path.join(os.path.dirname(__file__), f'process_image/photos/{word}')):
-            if not photo.endswith('jpg'):
+            if not photo.endswith('png'):
                 continue
             resized_photo = process_image.ps.change_size(word, photo, 3840,2160)
         resized_photo_path = os.path.join(os.path.dirname(__file__), f'process_image/resized_photos/{word}')

@@ -42,7 +42,7 @@ def get_image(name: str):
         if width > height:
             # 照片的URL地址
             url = item["images"]["orig"]["url"]
-            file_name = name + str(number) + '.jpg'
+            file_name = name + str(number) + '.png'
             print("find one image",file_name)
             download_folder = str(folder) + "/" + file_name
             print("Download ::: ", url)
