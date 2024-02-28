@@ -35,7 +35,7 @@ def get_image(name: str):
     folder = "process_image/photos/"+name.replace(" ", "-")
     os.makedirs(folder, exist_ok=True)
     number = 0
-    max = 1
+    max = 10
     for item in sortedPins:
         image = item["images"]["orig"]
         width = image.get('width', 0)

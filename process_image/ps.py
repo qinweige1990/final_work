@@ -42,6 +42,7 @@ def replace_and_save_psd(photo, psd_file, name):
         doc = ps.active_document.duplicate(f'{orig_name}_process')
         for active_layer in doc.layerSets:
             # layer_set = ps.active_document.layerSets.getByName("画板 9")
+                
             print(f"current layer {active_layer.name}")
             replace_contents = ps.app.stringIDToTypeID("placedLayerReplaceContents")
             desc = ps.ActionDescriptor
