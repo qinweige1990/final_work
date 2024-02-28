@@ -21,7 +21,6 @@ def get_psd_files():
 
 @utils.debug_params
 def change_size(photo_dir, output_dir, width, height):
-    print(f'[CHANGE_SIZE] photo_dir={photo_dir}, ')
     for photo_name in photo_dir:
         photo_path = os.path.join(photo_dir, photo_name)
         with Session(photo_path, action="open", auto_close=True) as ps:
