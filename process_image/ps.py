@@ -26,15 +26,12 @@ def change_size(dir, photo_name, width, height):
         os.makedirs(resized_photo_path, exist_ok=True)
         output_path = os.path.join(resized_photo_path, photo_name)
         # resize image
-        if os.name == "nt":
-            orig_name = ps.active_document.name
-            thumb_name = f"{orig_name}_resize"
-            thumb_doc = ps.active_document.duplicate(thumb_name)
-            thumb_doc.resizeImage(width, height)
-            thumb_doc.saveAs(output_path, ps.JPEGSaveOptions(), asCopy=True)
-            thumb_doc.close()
-        else:
-            print("not windows, pass resize")
+        orig_name = ps.active_document.name
+        thumb_name = f"{orig_name}_resize"
+        thumb_doc = ps.active_document.duplicate(thumb_name)
+        thumb_doc.resizeImage(width, height)
+        thumb_doc.saveAs(output_path, ps.PNGSaveOptions(), asCopy=True)
+        thumb_doc.close()
     return output_path
 
 
