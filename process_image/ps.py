@@ -40,6 +40,7 @@ def change_size(dir, photo_name, width, height):
 
 def replace_and_save_psd(photo, psd_file, name):
     with Session(psd_file, action="open", auto_close=True) as ps:
+        print(f'photo:{photo}, psdFile:{psd_file}, name:{name}')
         orig_name = ps.active_document.name
         doc = ps.active_document.duplicate(f'{orig_name}_process')
         for active_layer in doc.layerSets:
