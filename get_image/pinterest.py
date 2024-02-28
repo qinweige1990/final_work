@@ -35,6 +35,7 @@ def get_image(name: str):
     folder = "process_image/photos/"+name.replace(" ", "-")
     os.makedirs(folder, exist_ok=True)
     number = 0
+    max = 1
     for item in sortedPins:
         image = item["images"]["orig"]
         width = image.get('width', 0)
@@ -48,7 +49,8 @@ def get_image(name: str):
             print("Download ::: ", url)
             urllib.request.urlretrieve(url,  download_folder)
             number = number + 1
-
+        if number >= max:
+            break
 '''
             # 使用requests库来获取照片
             response = requests.get(url)
