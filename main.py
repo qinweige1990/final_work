@@ -1,14 +1,10 @@
 import os.path
 
-import get_words.get_word
 import argparse
 import logging
-import pinterest_crawler_im
 from get_image import pinterest
 import get_words.google_trend
-import process_image.mock
-if os.name == "nt":
-    import process_image.ps
+import process_image.ps
 
 
 def logger():
@@ -43,11 +39,9 @@ if __name__ == "__main__":
         if not args.skip:
             pinterest.get_image(word)
         word = word.replace(" ", "-")
-        for photo in os.listdir(os.path.join(os.path.dirname(__file__), f'process_image/photos/{word}')):
-            if not photo.endswith('png'):
-                continue
-            resized_photo = process_image.ps.change_size(word, photo, 3840,2160)
-        resized_photo_path = os.path.join(os.path.dirname(__file__), f'process_image/resized_photos/{word}')
-        for photo in os.listdir(resized_photo_path):
-            process_image.ps.replace_and_save_psd(os.path.join(resized_photo_path, photo), os.path.join(this_root, 'files/template.psd'), word)
+        photo_dir = os.path.join(this_root, f"process_image/photos/{word}")
+        output_dir = os.path.join(this_root, f"process_image/resized_photos/{word}")
+        process_image.ps.change_size(photo_dir, output_dir, 3840,2160)
+
+        process_image.ps.replace_and_save_psd(output_dir, os.path.join(this_root, 'files/template.psd'), word)
     logging.info("处理完成")
