@@ -40,7 +40,7 @@ if __name__ == "__main__":
             pinterest.get_image(word)
         word = word.replace(" ", "-")
         photo_dir = os.path.join(this_root, f"process_image/photos/{word}")
-        output_dir = os.path.join(this_root, f"process_image/resized_photos/{word}")
+        output_dir = os.path.join(this_root, f"process_image\\resized_photos\\{word}")
         process_image.ps.change_size(photo_dir, output_dir, 3840,2160)
 
         process_image.ps.replace_and_save_psd(output_dir, os.path.join(this_root, 'files/template.psd'), word)
