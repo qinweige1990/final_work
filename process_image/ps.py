@@ -46,10 +46,10 @@ def replace_and_save_psd(dir, psd_file, photo_name):
                 print(input_file)
                 desc.putPath(idnull, input_file)
                 ps.app.executeAction(replace_contents, desc)
-            psd_output = f'{psd_file}_with_{photo_name}_{"".join(random.choices(string.ascii_letters, k=5))}'
+            psd_output = f'{psd_file}_{photo_name}_{"".join(random.choices(string.digits, k=4))}'
             doc.saveAs(psd_output, ps.PhotoshopSaveOptions(), asCopy=True)
         psd_path = f"{psd_output}.psd"
-        all_in_one_photo =  f"{psd_output}/final_photos/{photo_name}.png"
+        all_in_one_photo =  f"{psd_output}.png"
         split_photos_dir = f"{psd_output}/final_photos/{photo_name}"
         os.makedirs(split_photos_dir,exist_ok=True)
         psd = PSDImage.open(psd_path)
