@@ -24,7 +24,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--word", type=str)
     parser.add_argument("--num", type=int)
-    parser.add_argument("--skip", default=False, type=bool)
     args = parser.parse_args()
     if args.word != None:
         words = str.split(args.word, ",")
@@ -38,5 +37,4 @@ if __name__ == "__main__":
     # 从pinterest获取图片并保存
     number = args.num if args.num is not None else 2
     for word in words[:number]:
-        if not args.skip:
-            pinterest.get_image(word)
+        pinterest.get_image(word)
