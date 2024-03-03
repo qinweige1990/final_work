@@ -37,6 +37,7 @@ def change_size(photo_dir, output_dir, width, height):
 @utils.debug_params
 def replace_and_save_psd(dir, psd_file, photo_name):
     for photo in utils.list_files_abs_path(dir):
+        print(f"开始替换图片：{photo}")
         try:
             with Session(psd_file, action="open", auto_close=True) as ps:
                 orig_name = ps.active_document.name
@@ -48,7 +49,6 @@ def replace_and_save_psd(dir, psd_file, photo_name):
                     desc = ps.ActionDescriptor
                     idnull = ps.app.charIDToTypeID("null")
                     input_file = photo
-                    print(input_file)
                     desc.putPath(idnull, input_file)
                     ps.app.executeAction(replace_contents, desc)
                 psd_output = f'{psd_file}_{photo_name}_{"".join(random.choices(string.digits, k=4))}'
