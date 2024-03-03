@@ -10,7 +10,6 @@ from psd_tools import PSDImage
 from tempfile import mkdtemp
 import imghdr
 from util import utils
-import filetype
 from util_main import get_psd_files
 
 
