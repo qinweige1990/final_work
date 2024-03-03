@@ -36,12 +36,15 @@ if __name__ == "__main__":
     # 从pinterest获取图片并保存
     number = args.num if args.num is not None else 2
     for word in words[:number]:
-        if not args.skip:
-            pinterest.get_image(word)
-        word = word.replace(" ", "-")
-        photo_dir = os.path.join(this_root, f"process_image/photos/{word}")
-        output_dir = os.path.join(this_root, f"process_image\\resized_photos\\{word}")
-        process_image.ps.change_size(photo_dir, output_dir, 3840,2160)
+        try:
+            if not args.skip:
+                pinterest.get_image(word)
+            word = word.replace(" ", "-")
+            photo_dir = os.path.join(this_root, f"process_image/photos/{word}")
+            output_dir = os.path.join(this_root, f"process_image\\resized_photos\\{word}")
+            process_image.ps.change_size(photo_dir, output_dir, 3840,2160)
 
-        process_image.ps.replace_and_save_psd(output_dir, os.path.join(this_root, 'files/template.psd'), word)
+            process_image.ps.replace_and_save_psd(output_dir, os.path.join(this_root, 'files/template.psd'), word)
+        finally:
+            continue
     logging.info("处理完成")
