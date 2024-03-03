@@ -37,20 +37,23 @@ def get_image(name: str):
     number = 0
     max = 10
     for item in sortedPins:
-        image = item["images"]["orig"]
-        width = image.get('width', 0)
-        height = image.get('height', 0)
-        if width > height:
-            # 照片的URL地址
-            url = item["images"]["orig"]["url"]
-            file_name = name + str(number) + '.png'
-            print("find one image",file_name)
-            download_folder = str(folder) + "/" + file_name
-            print("Download ::: ", url)
-            urllib.request.urlretrieve(url,  download_folder)
-            number = number + 1
-        if number >= max:
-            break
+        try:
+            image = item["images"]["orig"]
+            width = image.get('width', 0)
+            height = image.get('height', 0)
+            if width > height:
+                # 照片的URL地址
+                url = item["images"]["orig"]["url"]
+                file_name = name + str(number) + '.png'
+                print("find one image",file_name)
+                download_folder = str(folder) + "/" + file_name
+                print("Download ::: ", url)
+                urllib.request.urlretrieve(url,  download_folder)
+                number = number + 1
+            if number >= max:
+                break
+        finally:
+            continue
 '''
             # 使用requests库来获取照片
             response = requests.get(url)

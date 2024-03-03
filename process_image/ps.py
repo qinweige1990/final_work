@@ -22,7 +22,7 @@ def change_size(photo_dir, output_dir, width, height):
             with Session(photo_name, action="open", auto_close=True) as ps:
                 os.makedirs(output_dir, exist_ok=True)
                 output_path = os.path.join(output_dir, photo_name.split("\\")[-1])
-                print(output_dir, photo_name.split("\\")[-1],output_path)
+                print(output_dir, photo_name.split("\\")[-1], output_path)
                 # resize image
                 orig_name = ps.active_document.name
                 thumb_name = f"{orig_name}_resize"
