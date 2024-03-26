@@ -24,7 +24,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--word", type=str)
     parser.add_argument("--num", type=int)
+
     args = parser.parse_args()
+    if args.word is None:
+        args.word = input("输入要拉取的关键词：")
     if args.word != None:
         words = str.split(args.word, ",")
         args.num = len(words)

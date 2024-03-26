@@ -27,7 +27,7 @@ def upscale_image(image_dir, output_dir):
 
         if response.status_code != 200:
             print("Non-200 response: " + str(response.text))
-            return
+            continue
         image_name = image.split('/')[-1]
         os.makedirs(output_dir, exist_ok=True)
         with open(f"{output_dir}/{image_name}", "wb") as f:
